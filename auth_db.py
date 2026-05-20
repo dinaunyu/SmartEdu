@@ -1,8 +1,6 @@
 import sqlite3
-
-# =========================
 # KONEKSI DATABASE
-# =========================
+
 conn = sqlite3.connect(
     "user.db",
     check_same_thread=False
@@ -10,9 +8,8 @@ conn = sqlite3.connect(
 
 c = conn.cursor()
 
-# =========================
 # BUAT TABEL USER
-# =========================
+
 def create_user_table():
 
     c.execute("""
@@ -25,9 +22,8 @@ def create_user_table():
 
     conn.commit()
 
-# =========================
 # REGISTER USER
-# =========================
+
 def register_user(username, password, nim):
 
     if not username or not password or not nim:
@@ -53,9 +49,8 @@ def register_user(username, password, nim):
 
     return "Registrasi berhasil!"
 
-# =========================
 # LOGIN USER
-# =========================
+
 def login_user(username, password):
 
     c.execute("""
@@ -66,9 +61,8 @@ def login_user(username, password):
 
     return c.fetchone()
 
-# =========================
 # AMBIL USER
-# =========================
+
 def get_user(username):
 
     c.execute("""
@@ -78,8 +72,6 @@ def get_user(username):
     """, (username,))
 
     return c.fetchone()
-
-# =========================
 # JALANKAN TABLE
-# =========================
+
 create_user_table()
