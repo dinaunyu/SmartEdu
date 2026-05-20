@@ -3,32 +3,27 @@ import base64
 from auth_db import login_user, register_user, create_user_table
 from nilai_db import *
 
-# =========================
 # INIT DATABASE
-# =========================
+
 create_user_table()
 create_table()
 
-# =========================
 # CONFIG
-# =========================
+
 st.set_page_config(
     page_title="SmartEdu",
     layout="wide"
 )
-
-# =========================
 # SESSION
-# =========================
+
 if "login" not in st.session_state:
     st.session_state.login = False
 
 if "page" not in st.session_state:
     st.session_state.page = "landing"
 
-# =========================
 # STYLE
-# =========================
+
 st.markdown("""
 <style>
 
@@ -161,9 +156,8 @@ label,p,h1,h2,h3,h4,h5,h6{
 </style>
 """, unsafe_allow_html=True)
 
-# =========================
 # LOGO
-# =========================
+
 def tampilkan_logo(size=150):
 
     try:
@@ -180,9 +174,8 @@ def tampilkan_logo(size=150):
     except:
         pass
 
-# =========================
 # RULE BASED
-# =========================
+
 def hitung_nilai(tugas, uts, uas):
 
     nilai = (0.3*tugas) + (0.3*uts) + (0.4*uas)
@@ -199,9 +192,7 @@ def hitung_nilai(tugas, uts, uas):
     else:
         return nilai,"D","Kurang"
 
-# =========================
 # LANDING PAGE
-# =========================
 def landing_page():
 
     st.markdown("""
@@ -318,9 +309,8 @@ def landing_page():
                 st.rerun()
 
         st.markdown("</div>", unsafe_allow_html=True)
-# =========================
 # LOGIN PAGE
-# =========================
+
 def login_page():
 
     st.title("Login")
@@ -343,9 +333,8 @@ def login_page():
         else:
             st.error("Login gagal")
 
-# =========================
 # REGISTER PAGE
-# =========================
+
 def register_page():
 
     st.title("Register")
@@ -364,9 +353,8 @@ def register_page():
 
         st.success(hasil)
 
-# =========================
 # ROUTING
-# =========================
+
 if not st.session_state.login:
 
     if st.session_state.page == "landing":
@@ -387,9 +375,8 @@ if not st.session_state.login:
 
     st.stop()
 
-# =========================
 # SIDEBAR
-# =========================
+
 st.sidebar.success(
     f"👤 {st.session_state.user}"
 )
@@ -405,10 +392,8 @@ menu = st.sidebar.selectbox(
     "Menu",
     ["Profil","Tambah","Lihat","Edit","Hapus"]
 )
-
-# =========================
 # PROFIL
-# =========================
+
 if menu == "Profil":
 
     st.title("Profil User")
@@ -426,9 +411,8 @@ if menu == "Profil":
     if "alamat_profil" not in st.session_state:
         st.session_state.alamat_profil = "Semarang"
 
-    # =========================
     # CARD PROFIL
-    # =========================
+   
     st.markdown(f"""
     <div style="
         background: rgba(255,255,255,0.06);
@@ -457,9 +441,8 @@ if menu == "Profil":
     </div>
     """, unsafe_allow_html=True)
 
-    # =========================
     # FORM EDIT
-    # =========================
+    
     st.subheader("Edit Profil")
 
     nama = st.text_input(
@@ -481,10 +464,8 @@ if menu == "Profil":
         "Alamat",
         value=st.session_state.alamat_profil
     )
-
-    # =========================
     # BUTTON SIMPAN
-    # =========================
+   
     if st.button("Simpan Profil"):
 
         st.session_state.nama_profil = nama
@@ -495,9 +476,8 @@ if menu == "Profil":
         st.success("Profil berhasil diupdate")
 
         st.rerun()
-# =========================
 # TAMBAH
-# =========================
+
 elif menu == "Tambah":
 
     st.title("Tambah Data")
@@ -550,9 +530,8 @@ elif menu == "Tambah":
         st.write("Grade :", grade)
         st.write("Keterangan :", ket)
 
-# =========================
 # LIHAT
-# =========================
+
 elif menu == "Lihat":
 
     st.title("Data Mahasiswa")
@@ -562,9 +541,8 @@ elif menu == "Lihat":
         use_container_width=True
     )
 
-# =========================
 # EDIT
-# =========================
+
 elif menu == "Edit":
 
     st.title("Edit Data")
@@ -629,9 +607,8 @@ elif menu == "Edit":
 
             st.success("Data berhasil diupdate")
 
-# =========================
 # HAPUS
-# =========================
+
 elif menu == "Hapus":
 
     st.title("Hapus Data")
