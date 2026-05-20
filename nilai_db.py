@@ -1,9 +1,8 @@
 import sqlite3
 import pandas as pd
 
-# =========================
 # KONEKSI DATABASE
-# =========================
+
 conn = sqlite3.connect(
     "nilai.db",
     check_same_thread=False
@@ -11,9 +10,8 @@ conn = sqlite3.connect(
 
 c = conn.cursor()
 
-# =========================
 # BUAT TABEL NILAI
-# =========================
+
 def create_table():
 
     c.execute("""
@@ -31,9 +29,8 @@ def create_table():
 
     conn.commit()
 
-# =========================
 # TAMBAH DATA
-# =========================
+
 def tambah_data(
     nama,
     tugas,
@@ -68,9 +65,7 @@ def tambah_data(
 
     conn.commit()
 
-# =========================
 # AMBIL DATA
-# =========================
 def ambil_data():
 
     return pd.read_sql(
@@ -78,9 +73,9 @@ def ambil_data():
         conn
     )
 
-# =========================
+
 # UPDATE DATA
-# =========================
+
 def update_data(
     id,
     nama,
@@ -116,9 +111,9 @@ def update_data(
 
     conn.commit()
 
-# =========================
+
 # HAPUS DATA
-# =========================
+
 def hapus_data(id):
 
     c.execute("""
@@ -128,9 +123,8 @@ def hapus_data(id):
 
     conn.commit()
 
-# =========================
 # TABEL PROFIL
-# =========================
+
 def create_profile_table():
 
     c.execute("""
@@ -145,9 +139,8 @@ def create_profile_table():
 
     conn.commit()
 
-# =========================
 # SIMPAN PROFIL
-# =========================
+
 def simpan_profil(
     username,
     nama,
@@ -178,9 +171,8 @@ def simpan_profil(
 
     conn.commit()
 
-# =========================
 # AMBIL PROFIL
-# =========================
+
 def ambil_profil(username):
 
     create_profile_table()
@@ -193,8 +185,7 @@ def ambil_profil(username):
 
     return c.fetchone()
 
-# =========================
 # AUTO CREATE TABLE
-# =========================
+
 create_table()
 create_profile_table()
